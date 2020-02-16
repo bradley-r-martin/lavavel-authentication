@@ -8,7 +8,7 @@
       "email": "bradley.r.martin@me.com"
     }
   ],
-  "version": "1.0.0",
+  "minimum-stability": "dev",
   "require": {
     "bradley-r-martin/laravel-vivid": "1.0.0",
     "tymon/jwt-auth": "dev-develop"
