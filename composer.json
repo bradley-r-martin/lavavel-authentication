@@ -1,0 +1,27 @@
+{
+  "name": "bradley-r-martin/authentication",
+  "description": "Authentication Library for Laravel",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Brad Martin",
+      "email": "bradley.r.martin@me.com"
+    }
+  ],
+  "version": "1.0.0",
+  "require": {
+    "tymon/jwt-auth": "dev-develop"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "BRM\\Authentication\\FrameworkServiceProvider"
+      ]
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "BRM\\Authentication\\": "./"
+    }
+  }
+}
