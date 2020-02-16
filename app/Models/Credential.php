@@ -8,7 +8,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Credential extends Model implements JWTSubject
 {
-    use \Hyn\Tenancy\Traits\UsesTenantConnection;
+    use \BRM\Vivid\app\Traits\Model;
 
     const CREATED_AT = 'createdAt';
     const UPDATED_AT = 'updatedAt';

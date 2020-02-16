@@ -33,7 +33,7 @@ class Authentication
     public function store($data = [])
     {
         $this->validation = [
-          'email' => ['required','unique:tenant.credentials,email'],
+          'email' => ['required','unique:credentials,email'],
           'subject' => ['required'],
           'subjectId' => ['required']
         ];
@@ -65,7 +65,7 @@ class Authentication
     {
         $validator = Validator::make($data, [
           'token' => 'string',
-          'email' => 'required_without:token|email|exists:tenant.credentials,email',
+          'email' => 'required_without:token|email|exists:credentials,email',
           'password' => 'required_without:token',
           'persistent' => 'boolean'
         ]);
@@ -183,7 +183,7 @@ class Authentication
     {
         $validator = Validator::make($data, [
           'token' => 'string',
-          'email' => 'required_without:token|email|exists:tenant.credentials,email',
+          'email' => 'required_without:token|email|exists:credentials,email',
           'all' => 'boolean|required_without:token'
         ]);
         $credential = null;
