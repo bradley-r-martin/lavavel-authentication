@@ -10,6 +10,7 @@
   ],
   "version": "1.0.0",
   "require": {
+    "bradley-r-martin/laravel-vivid": "1.0.0",
     "tymon/jwt-auth": "dev-develop"
   },
   "extra": {
