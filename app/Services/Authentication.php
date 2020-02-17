@@ -13,14 +13,14 @@ class Authentication
     {
         $this->model = \BRM\Authentication\app\Models\Credential::class;
         $this->fields = [
-          'email',
+          'username',
           'password',
           'subject',
           'subjectId',
           'series'
         ];
         $this->sanitise = [
-          'email'=> ['string','email']
+          'username'=> ['string']
         ];
     }
 
@@ -33,7 +33,7 @@ class Authentication
     public function store($data = [])
     {
         $this->validation = [
-          'email' => ['required','unique:credentials,email'],
+          'username' => ['required','unique:credentials,username'],
           'subject' => ['required'],
           'subjectId' => ['required']
         ];
@@ -65,7 +65,7 @@ class Authentication
     {
         $validator = Validator::make($data, [
           'token' => 'string',
-          'email' => 'required_without:token|email|exists:credentials,email',
+          'username' => 'required_without:token|exists:credentials,username',
           'password' => 'required_without:token',
           'persistent' => 'boolean'
         ]);
@@ -73,7 +73,7 @@ class Authentication
         $validator->after(function ($validator) use ($data, &$credentials) {
             if (!$validator->failed()) {
                 if (!isset($data['token'])) {
-                    $credentials = (new $this->model)->where('email', $data['email'])->get()->first();
+                    $credentials = (new $this->model)->where('username', $data['username'])->get()->first();
                     if (!$credentials|| !\Hash::check($data['password'], $credentials->password)) {
                         $validator->errors()->add('password', 'The password provided is invalid');
                     }
@@ -183,14 +183,14 @@ class Authentication
     {
         $validator = Validator::make($data, [
           'token' => 'string',
-          'email' => 'required_without:token|email|exists:credentials,email',
+          'username' => 'required_without:token|exists:credentials,username',
           'all' => 'boolean|required_without:token'
         ]);
         $credential = null;
         $validator->after(function ($validator) use ($data, &$credential) {
             if (!$validator->failed()) {
-                if (isset($data['email'])) {
-                    $credential = (new $this->model)->where('email', $data['email'])->first();
+                if (isset($data['username'])) {
+                    $credential = (new $this->model)->where('username', $data['username'])->first();
                 } else {
                     try {
                         $token = \JWTAuth::manager()->decode(new \Tymon\JWTAuth\Token($data['token']));

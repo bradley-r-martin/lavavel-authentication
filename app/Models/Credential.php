@@ -14,7 +14,7 @@ class Credential extends Model implements JWTSubject
     const UPDATED_AT = 'updatedAt';
 
     protected $hidden = [
-      'email',
+      'username',
       'password',
       'series'
     ];
