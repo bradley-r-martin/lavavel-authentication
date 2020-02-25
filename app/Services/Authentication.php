@@ -100,7 +100,7 @@ class Authentication
             return [
               'status'=>'failed',
               'data'=>[
-                'errors'=> $validator->messages()
+                'errors'=> $validator->errors()->all()
               ]
             ];
         }
