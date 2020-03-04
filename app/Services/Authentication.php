@@ -116,6 +116,7 @@ class Authentication
             $credentials->series = md5(bcrypt(rand()));
         }
         $credentials->save();
+        \Auth::login($credentials);
         return [
           'status'=>'success',
           'data'=>[
@@ -206,6 +207,7 @@ class Authentication
           
                 try {
                     \JWTAuth::manager()->invalidate(new \Tymon\JWTAuth\Token($data['token']));
+                    \Auth::logout();
                 } catch (Exception $e) {
                     if ($e instanceof \Tymon\JWTAuth\Exceptions\JWTException) {
                         if (!isset($data['all']) || !$data['all']) {

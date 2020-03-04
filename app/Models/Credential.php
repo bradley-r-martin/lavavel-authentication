@@ -5,8 +5,9 @@ namespace BRM\Authentication\app\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Credential extends Model implements JWTSubject
+class Credential extends Authenticatable implements JWTSubject
 {
     use \BRM\Vivid\app\Traits\Model;
 
