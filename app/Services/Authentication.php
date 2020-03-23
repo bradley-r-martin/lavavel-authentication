@@ -67,7 +67,7 @@ class Authentication
           'token' => ['required']
         ];
 
-        if(!$credentials = $this->model::find($this->data['token'])){
+        if(!$credentials = $this->model::find($data['token'])){
           $this->response = [
             'status'=>'failed',
             'data'=> [
