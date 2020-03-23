@@ -46,6 +46,12 @@ class Credential extends Authenticatable implements JWTSubject
       $this->save();
     }
 
+    public function recoveryToken(){
+      $this->recoveryToken = md5(bcrypt(rand()));
+      $this->save();
+      return $this->recoveryToken;
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
