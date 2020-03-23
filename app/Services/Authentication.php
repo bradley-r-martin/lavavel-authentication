@@ -61,6 +61,40 @@ class Authentication
      * @param mixed $data
      * @return void
      */
+    public function recover($data = [])
+    {
+        $this->validation = [
+          'token' => ['required']
+        ];
+
+        if(!$credentials = $this->model::find($this->data['token'])){
+          $this->response = [
+            'status'=>'failed',
+            'data'=> [
+              'errors'=> ['Token is invaild.']
+            ]
+          ];
+        }
+        $data['credential'] = $credentials->id;
+
+        $this->hook('afterSave', function () {
+            return $this->authenticate([
+              'username'=>$this->record->username,
+              'password'=>$this->record->password
+            ]);
+        });
+
+        return $this->vivid('update', $data);
+    }
+
+
+
+    /**
+     * authenticate
+     *
+     * @param mixed $data
+     * @return void
+     */
     public function authenticate($data = [])
     {
         $validator = Validator::make($data, [

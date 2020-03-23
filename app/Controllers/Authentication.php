@@ -18,6 +18,12 @@ class Authentication extends \Illuminate\Routing\Controller
         return response()->api($response, 200);
     }
 
+    public function recover(Request $request)
+    {
+        $response = (new $this->service)->recover($request->all());
+        return response()->api($response, 200);
+    }
+
     public function options(Request $request)
     {
         $response = (new $this->service)->options($request->all());
