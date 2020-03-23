@@ -41,7 +41,7 @@ class Credential extends Authenticatable implements JWTSubject
     }
 
 
-    public function resetSeries(){
+    public function unauthenticate(){
       $this->series = md5(bcrypt(rand()));
       $this->save();
     }
