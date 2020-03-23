@@ -67,7 +67,7 @@ class Authentication
           'token' => ['required']
         ];
 
-        if(!$credentials = $this->model::find($data['token'])){
+        if(!$credentials = $this->model::where(['recoveryToken','=',$data['token']])->first()){
           $this->response = [
             'status'=>'failed',
             'data'=> [
