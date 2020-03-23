@@ -67,7 +67,7 @@ class Authentication
           'token' => ['required']
         ];
 
-        if(!$credentials = $this->model::where(['recoveryToken','=',$data['token']])->first()){
+        if(!$credentials = $this->model::where([['recoveryToken','=',$data['token']]])->first()){
           $this->response = [
             'status'=>'failed',
             'data'=> [
@@ -78,7 +78,7 @@ class Authentication
         $data['credential'] = $credentials->id;
 
         $this->hook('afterSave', function () {
-            return $this->authenticate([
+           $this->response = $this->authenticate([
               'username'=>$this->record->username,
               'password'=>$this->record->password
             ]);
