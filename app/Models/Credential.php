@@ -40,6 +40,12 @@ class Credential extends Authenticatable implements JWTSubject
         return $this->belongsTo($this->subject, 'subjectId', 'id');
     }
 
+
+    public function resetSeries(){
+      $this->series = md5(bcrypt(rand()));
+      $this->save();
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
