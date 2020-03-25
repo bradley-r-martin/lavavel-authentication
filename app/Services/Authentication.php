@@ -181,9 +181,9 @@ class Authentication
                 try {
                     $token = \JWTAuth::manager()->decode(new \Tymon\JWTAuth\Token($data['token']));
                     $credentials = (new $this->model)->find($token['sub']);
-                    if($credentials->series !==   $token['claims']['series']){
+                    if ($credentials->series !== $token['series']) {
                       $validator->errors()->add('token', 'Token is Invalid');
-                    }
+                  }
                 } catch (Exception $e) {
                     if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
                         $validator->errors()->add('token', 'Token is Invalid');
