@@ -149,6 +149,7 @@ class Authentication
         if (empty($credentials->series)) {
             $credentials->series = md5(bcrypt(rand()));
         }
+        $credentials->claims['series'] = $credentials->series;
         $credentials->save();
         \Auth::login($credentials);
         return [
@@ -180,6 +181,9 @@ class Authentication
                 try {
                     $token = \JWTAuth::manager()->decode(new \Tymon\JWTAuth\Token($data['token']));
                     $credentials = (new $this->model)->find($token['sub']);
+                    if($credentials->series !==   $token['claims']['series']){
+                      $validator->errors()->add('token', 'Token is Invalid');
+                    }
                 } catch (Exception $e) {
                     if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
                         $validator->errors()->add('token', 'Token is Invalid');
