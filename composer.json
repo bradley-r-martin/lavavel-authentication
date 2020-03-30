@@ -10,7 +10,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "bradley-r-martin/laravel-vivid": "1.0.0",
+    "bradley-r-martin/laravel-vivid": "*",
     "tymon/jwt-auth": "dev-develop"
   },
   "extra": {
